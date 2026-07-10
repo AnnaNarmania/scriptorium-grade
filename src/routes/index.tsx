@@ -34,6 +34,16 @@ const CURRICULA = [
   "Design, B.F.A.",
 ] as const;
 
+const CHAPTER_ACCENTS = [
+  "var(--color-pink)",
+  "var(--color-blue)",
+  "var(--color-yellow)",
+  "var(--color-mint)",
+  "var(--color-coral)",
+  "var(--color-lavender)",
+] as const;
+
+
 const defaultData = (): Semester[] => [
   {
     id: uid(),
@@ -206,19 +216,29 @@ function Index() {
         {/* HEADER */}
         <header className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-8 md:gap-12">
           <div className="min-w-0">
-            <p className="label-eyebrow mb-4 md:mb-6">
-              Issue N°01 · Academic Record
-            </p>
-            <h1 className="numeric-display text-[2.6rem] leading-[0.95] sm:text-5xl md:text-6xl lg:text-[5.25rem] font-medium text-foreground">
+            <div className="mb-4 md:mb-6 flex flex-wrap items-center gap-2">
+              <span className="sticker" style={{ backgroundColor: "var(--color-yellow)" }}>
+                Issue N°01
+              </span>
+              <span className="sticker">2026 Edition</span>
+              <span className="sticker" style={{ backgroundColor: "var(--color-mint)" }}>
+                Academic Archive
+              </span>
+            </div>
+            <h1 className="numeric-display text-[2.6rem] leading-[0.9] sm:text-5xl md:text-6xl lg:text-[5.5rem] font-medium text-foreground">
               University
               <br />
-              <span className="italic font-normal">GPA</span> Calculator
+              <span className="italic font-normal" style={{ color: "var(--color-pink)" }}>
+                GPA
+              </span>{" "}
+              Calculator
             </h1>
             <p className="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
               Calculate your GPA. Modify subjects, credits and semesters at any
               time. Every change is saved to this browser.
             </p>
           </div>
+
 
           <div className="flex flex-col items-end gap-4 shrink-0 pt-1">
             <span className="flex items-center gap-2 label-eyebrow">
@@ -264,7 +284,7 @@ function Index() {
           aria-label="Summary"
           className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 py-10 md:py-14"
         >
-          <StatBlock label="Current GPA" value={stats.gpa.toFixed(2)} />
+          <StatBlock label="Current GPA" value={stats.gpa.toFixed(2)} highlight />
           <StatBlock label="Completed Credits" value={String(stats.credits)} />
           <StatBlock
             label="Average Grade"
@@ -285,6 +305,7 @@ function Index() {
               key={semester.id}
               index={i + 1}
               semester={semester}
+              accent={CHAPTER_ACCENTS[i % CHAPTER_ACCENTS.length]}
               onRename={(n) => renameSemester(semester.id, n)}
               onRemove={() => removeSemester(semester.id)}
               onAddSubject={() => addSubject(semester.id)}
@@ -295,17 +316,20 @@ function Index() {
             />
           ))}
 
+
           <div className="rule-thick" />
 
           <div className="flex flex-wrap items-center justify-between gap-4 py-8">
             <p className="label-eyebrow">End of Record</p>
             <button
               onClick={addSemester}
-              className="group inline-flex items-center gap-3 text-sm font-medium text-primary hover:opacity-80 transition-opacity"
+              className="inline-flex items-center gap-2 label-eyebrow px-4 py-2.5 rounded-[4px] border border-foreground transition-colors hover:bg-foreground hover:text-background"
+              style={{ backgroundColor: "var(--color-pink)", color: "var(--color-foreground)" }}
             >
-              <span className="inline-block h-px w-8 bg-current" />
+              <span aria-hidden>+</span>
               Add Semester
             </button>
+
           </div>
         </main>
 
@@ -322,20 +346,42 @@ function Index() {
   );
 }
 
-function StatBlock({ label, value }: { label: string; value: string }) {
+function StatBlock({
+  label,
+  value,
+  highlight = false,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
   return (
     <div className="flex flex-col gap-3">
       <span className="label-eyebrow">{label}</span>
-      <span className="numeric-display text-5xl md:text-6xl lg:text-7xl font-medium">
-        {value}
-      </span>
+      {highlight ? (
+        <span
+          className="numeric-display inline-block self-start px-3 py-1 -mx-1 text-5xl md:text-6xl lg:text-7xl font-medium"
+          style={{
+            backgroundColor: "var(--color-pink)",
+            color: "var(--color-primary-foreground)",
+          }}
+        >
+          {value}
+        </span>
+      ) : (
+        <span className="numeric-display text-5xl md:text-6xl lg:text-7xl font-medium">
+          {value}
+        </span>
+      )}
     </div>
   );
 }
 
+
 function SemesterChapter({
   index,
   semester,
+  accent,
   onRename,
   onRemove,
   onAddSubject,
@@ -344,6 +390,7 @@ function SemesterChapter({
 }: {
   index: number;
   semester: Semester;
+  accent: string;
   onRename: (n: string) => void;
   onRemove: () => void;
   onAddSubject: () => void;
@@ -356,13 +403,22 @@ function SemesterChapter({
         <div className="flex md:block items-baseline gap-6">
           <span
             aria-hidden
-            className="numeric-display text-7xl md:text-[8rem] leading-none text-foreground/90 font-medium"
+            className="numeric-display text-7xl md:text-[9rem] leading-none font-medium"
+            style={{ color: accent }}
           >
             {ordinal(index)}
           </span>
         </div>
         <div className="flex flex-col justify-end min-w-0">
-          <p className="label-eyebrow mb-2">Chapter {ordinal(index)}</p>
+          <p className="label-eyebrow mb-2 flex items-center gap-2">
+            <span
+              aria-hidden
+              className="inline-block h-2 w-6"
+              style={{ backgroundColor: accent }}
+            />
+            Chapter {ordinal(index)}
+          </p>
+
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
             <input
               value={semester.name}
@@ -450,20 +506,20 @@ function SemesterChapter({
         </ul>
       )}
 
-      <div className="pt-5">
+      <div className="pt-6">
         <button
           onClick={onAddSubject}
-          className="inline-flex items-center gap-3 text-sm font-medium text-primary hover:opacity-80 transition-opacity"
+          className="inline-flex items-center gap-2 label-eyebrow px-3 py-2 border border-foreground bg-foreground text-background hover:bg-background hover:text-foreground transition-colors rounded-[4px]"
+          style={{ backgroundColor: accent, color: "var(--color-foreground)", borderColor: "var(--color-foreground)" }}
         >
-          <span aria-hidden className="text-base leading-none">
-            +
-          </span>
+          <span aria-hidden>+</span>
           Add Subject
         </button>
       </div>
     </section>
   );
 }
+
 
 function numberWord(n: number) {
   const words = [
