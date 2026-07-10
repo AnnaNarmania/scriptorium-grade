@@ -206,19 +206,29 @@ function Index() {
         {/* HEADER */}
         <header className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-8 md:gap-12">
           <div className="min-w-0">
-            <p className="label-eyebrow mb-4 md:mb-6">
-              Issue N°01 · Academic Record
-            </p>
-            <h1 className="numeric-display text-[2.6rem] leading-[0.95] sm:text-5xl md:text-6xl lg:text-[5.25rem] font-medium text-foreground">
+            <div className="mb-4 md:mb-6 flex flex-wrap items-center gap-2">
+              <span className="sticker" style={{ backgroundColor: "var(--color-yellow)" }}>
+                Issue N°01
+              </span>
+              <span className="sticker">2026 Edition</span>
+              <span className="sticker" style={{ backgroundColor: "var(--color-mint)" }}>
+                Academic Archive
+              </span>
+            </div>
+            <h1 className="numeric-display text-[2.6rem] leading-[0.9] sm:text-5xl md:text-6xl lg:text-[5.5rem] font-medium text-foreground">
               University
               <br />
-              <span className="italic font-normal">GPA</span> Calculator
+              <span className="italic font-normal" style={{ color: "var(--color-pink)" }}>
+                GPA
+              </span>{" "}
+              Calculator
             </h1>
             <p className="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
               Calculate your GPA. Modify subjects, credits and semesters at any
               time. Every change is saved to this browser.
             </p>
           </div>
+
 
           <div className="flex flex-col items-end gap-4 shrink-0 pt-1">
             <span className="flex items-center gap-2 label-eyebrow">
