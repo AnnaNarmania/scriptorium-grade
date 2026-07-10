@@ -379,6 +379,7 @@ function StatBlock({
 function SemesterChapter({
   index,
   semester,
+  accent,
   onRename,
   onRemove,
   onAddSubject,
@@ -387,6 +388,7 @@ function SemesterChapter({
 }: {
   index: number;
   semester: Semester;
+  accent: string;
   onRename: (n: string) => void;
   onRemove: () => void;
   onAddSubject: () => void;
@@ -399,13 +401,22 @@ function SemesterChapter({
         <div className="flex md:block items-baseline gap-6">
           <span
             aria-hidden
-            className="numeric-display text-7xl md:text-[8rem] leading-none text-foreground/90 font-medium"
+            className="numeric-display text-7xl md:text-[9rem] leading-none font-medium"
+            style={{ color: accent }}
           >
             {ordinal(index)}
           </span>
         </div>
         <div className="flex flex-col justify-end min-w-0">
-          <p className="label-eyebrow mb-2">Chapter {ordinal(index)}</p>
+          <p className="label-eyebrow mb-2 flex items-center gap-2">
+            <span
+              aria-hidden
+              className="inline-block h-2 w-6"
+              style={{ backgroundColor: accent }}
+            />
+            Chapter {ordinal(index)}
+          </p>
+
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
             <input
               value={semester.name}
