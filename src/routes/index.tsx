@@ -504,20 +504,20 @@ function SemesterChapter({
         </ul>
       )}
 
-      <div className="pt-5">
+      <div className="pt-6">
         <button
           onClick={onAddSubject}
-          className="inline-flex items-center gap-3 text-sm font-medium text-primary hover:opacity-80 transition-opacity"
+          className="inline-flex items-center gap-2 label-eyebrow px-3 py-2 border border-foreground bg-foreground text-background hover:bg-background hover:text-foreground transition-colors rounded-[4px]"
+          style={{ backgroundColor: accent, color: "var(--color-foreground)", borderColor: "var(--color-foreground)" }}
         >
-          <span aria-hidden className="text-base leading-none">
-            +
-          </span>
+          <span aria-hidden>+</span>
           Add Subject
         </button>
       </div>
     </section>
   );
 }
+
 
 function numberWord(n: number) {
   const words = [
