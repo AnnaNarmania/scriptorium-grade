@@ -34,6 +34,16 @@ const CURRICULA = [
   "Design, B.F.A.",
 ] as const;
 
+const CHAPTER_ACCENTS = [
+  "var(--color-pink)",
+  "var(--color-blue)",
+  "var(--color-yellow)",
+  "var(--color-mint)",
+  "var(--color-coral)",
+  "var(--color-lavender)",
+] as const;
+
+
 const defaultData = (): Semester[] => [
   {
     id: uid(),
