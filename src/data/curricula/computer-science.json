@@ -1,0 +1,86 @@
+{
+  "id": "computer-science-bsc",
+  "faculty": "Computer Science",
+  "degree": "Bachelor of Science in Computer Science",
+  "totalCredits": 240,
+  "gradingSystem": "KIU",
+  "semesters": [
+    {
+      "semester": 1,
+      "subjects": [
+        { "name": "Introduction to Informatics 1", "credits": 6, "category": "mandatory" },
+        { "name": "Introduction to Computer Architecture", "credits": 6, "category": "mandatory" },
+        { "name": "Discrete Structures", "credits": 6, "category": "mandatory" },
+        { "name": "Programming Fundamentals (Laboratory)", "credits": 6, "category": "mandatory" },
+        { "name": "English Language 1", "credits": 6, "category": "language" }
+      ]
+    },
+    {
+      "semester": 2,
+      "subjects": [
+        { "name": "Introduction to Informatics 2", "credits": 6, "category": "mandatory" },
+        { "name": "Operating Systems Principles and System Programming", "credits": 6, "category": "mandatory" },
+        { "name": "Analysis for Informatics", "credits": 6, "category": "mandatory" },
+        { "name": "Laboratory: Computer Organization and Computer Architecture", "credits": 6, "category": "mandatory" },
+        { "name": "English Language 2", "credits": 6, "category": "language" }
+      ]
+    },
+    {
+      "semester": 3,
+      "subjects": [
+        { "name": "Databases 1", "credits": 6, "category": "mandatory" },
+        { "name": "Fundamentals of Algorithms and Data Structures", "credits": 6, "category": "mandatory" },
+        { "name": "Linear Algebra for Informatics", "credits": 6, "category": "mandatory" },
+        { "name": "Minor / Free Elective", "credits": 6, "category": "minor" },
+        { "name": "Minor / Free Elective", "credits": 6, "category": "minor" }
+      ]
+    },
+    {
+      "semester": 4,
+      "subjects": [
+        { "name": "Scripting Languages", "credits": 6, "category": "mandatory" },
+        { "name": "Introduction to Theory of Computation", "credits": 6, "category": "mandatory" },
+        { "name": "Discrete Probability Theory", "credits": 6, "category": "mandatory" },
+        { "name": "Minor / Free Elective", "credits": 6, "category": "minor" },
+        { "name": "Minor / Free Elective", "credits": 6, "category": "minor" }
+      ]
+    },
+    {
+      "semester": 5,
+      "subjects": [
+        { "name": "Numerical Programming", "credits": 6, "category": "mandatory" },
+        { "name": "Introduction to Software Engineering", "credits": 6, "category": "mandatory" },
+        { "name": "Minor / Free Elective", "credits": 6, "category": "minor" },
+        { "name": "Elective", "credits": 6, "category": "elective" },
+        { "name": "Elective", "credits": 6, "category": "elective" }
+      ]
+    },
+    {
+      "semester": 6,
+      "subjects": [
+        { "name": "Introduction to Computer Networking and Distributed Systems", "credits": 6, "category": "mandatory" },
+        { "name": "Databases 2", "credits": 6, "category": "mandatory" },
+        { "name": "Elective", "credits": 6, "category": "elective" },
+        { "name": "Required Elective", "credits": 6, "category": "elective" },
+        { "name": "Elective", "credits": 6, "category": "elective" }
+      ]
+    },
+    {
+      "semester": 7,
+      "subjects": [
+        { "name": "Elective", "credits": 6, "category": "elective" },
+        { "name": "Elective", "credits": 6, "category": "elective" },
+        { "name": "Elective", "credits": 6, "category": "elective" },
+        { "name": "Internship", "credits": 12, "category": "internship" }
+      ]
+    },
+    {
+      "semester": 8,
+      "subjects": [
+        { "name": "Elective", "credits": 6, "category": "elective" },
+        { "name": "Elective", "credits": 6, "category": "elective" },
+        { "name": "Bachelor's Thesis / Capstone Project", "credits": 18, "category": "thesis" }
+      ]
+    }
+  ]
+}

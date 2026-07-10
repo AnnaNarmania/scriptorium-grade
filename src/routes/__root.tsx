@@ -77,22 +77,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "University GPA Calculator — Editorial" },
+      { title: "The Scriptorium — An Academic Archive" },
       {
         name: "description",
         content:
-          "A precise, editorial GPA calculator. Modify subjects, credits and semesters at any time.",
+          "Where grades are inscribed. An editorial GPA archive — subjects, credits and semesters weighed on the official 4.00 scale.",
       },
-      { property: "og:title", content: "University GPA Calculator" },
+      { property: "og:title", content: "The Scriptorium" },
       {
         property: "og:description",
-        content: "Calculate your GPA in a calm, editorial interface.",
+        content: "Where grades are inscribed — an editorial GPA archive.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      {
+        // Signature mark: the pink five-pointed star doubles as the logo.
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='50' text-anchor='middle' dominant-baseline='central' font-size='88' fill='%23FF4FA3'%3E%E2%98%85%3C/text%3E%3C/svg%3E",
+      },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
@@ -102,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Mono:wght@400;700&display=swap",
       },
     ],
   }),

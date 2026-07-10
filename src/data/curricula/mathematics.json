@@ -1,0 +1,84 @@
+{
+  "id": "mathematics-bsc",
+  "faculty": "Mathematics",
+  "degree": "Bachelor of Science in Mathematics",
+  "totalCredits": 240,
+  "gradingSystem": "KIU",
+  "semesters": [
+    {
+      "semester": 1,
+      "subjects": [
+        { "name": "Calculus", "credits": 12, "category": "mandatory" },
+        { "name": "Linear Algebra", "credits": 12, "category": "mandatory" },
+        { "name": "Mathematical Software", "credits": 3, "category": "mandatory" },
+        { "name": "English Language 1", "credits": 3, "category": "language" }
+      ]
+    },
+    {
+      "semester": 2,
+      "subjects": [
+        { "name": "Analysis 1", "credits": 12, "category": "mandatory" },
+        { "name": "Linear Algebra and Discrete Structures", "credits": 12, "category": "mandatory" },
+        { "name": "Introduction to Programming", "credits": 3, "category": "mandatory" },
+        { "name": "English Language 2", "credits": 3, "category": "language" }
+      ]
+    },
+    {
+      "semester": 3,
+      "subjects": [
+        { "name": "Analysis 2", "credits": 6, "category": "mandatory" },
+        { "name": "Numerical Linear Algebra", "credits": 6, "category": "mandatory" },
+        { "name": "Introduction to Probability Theory", "credits": 6, "category": "mandatory" },
+        { "name": "Minor", "credits": 6, "category": "minor" },
+        { "name": "Minor", "credits": 6, "category": "minor" }
+      ]
+    },
+    {
+      "semester": 4,
+      "subjects": [
+        { "name": "Introduction to Optimization Methods", "credits": 6, "category": "mandatory" },
+        { "name": "Numerical Analysis", "credits": 6, "category": "mandatory" },
+        { "name": "Analysis 3", "credits": 6, "category": "mandatory" },
+        { "name": "Minor", "credits": 6, "category": "minor" },
+        { "name": "Minor", "credits": 6, "category": "minor" }
+      ]
+    },
+    {
+      "semester": 5,
+      "subjects": [
+        { "name": "Linear Optimization", "credits": 6, "category": "mandatory" },
+        { "name": "Elective 1", "credits": 6, "category": "elective" },
+        { "name": "Introduction to Stochastic Processes", "credits": 6, "category": "mandatory" },
+        { "name": "Minor", "credits": 6, "category": "minor" },
+        { "name": "Minor", "credits": 6, "category": "minor" }
+      ]
+    },
+    {
+      "semester": 6,
+      "subjects": [
+        { "name": "Nonlinear Optimization Problems with Constraints", "credits": 6, "category": "mandatory" },
+        { "name": "Numerical Methods for Differential Equations with AI", "credits": 6, "category": "mandatory" },
+        { "name": "Stochastic Differential Equations", "credits": 6, "category": "mandatory" },
+        { "name": "Elective 2", "credits": 6, "category": "elective" },
+        { "name": "Minor", "credits": 6, "category": "minor" }
+      ]
+    },
+    {
+      "semester": 7,
+      "subjects": [
+        { "name": "Selected Topics in Optimization Methods", "credits": 6, "category": "mandatory" },
+        { "name": "Selected Topics in Numerical Mathematics", "credits": 6, "category": "mandatory" },
+        { "name": "Selected Topics in Probability and Statistics", "credits": 6, "category": "mandatory" },
+        { "name": "Internship / Project / Case Studies", "credits": 12, "category": "internship" }
+      ]
+    },
+    {
+      "semester": 8,
+      "subjects": [
+        { "name": "Elective 3", "credits": 6, "category": "elective" },
+        { "name": "Elective 4", "credits": 6, "category": "elective" },
+        { "name": "Bachelor's Thesis / Capstone Project", "credits": 18, "category": "thesis" }
+      ]
+    }
+  ]
+}

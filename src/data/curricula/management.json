@@ -1,0 +1,89 @@
+{
+  "id": "management",
+  "faculty": "Management",
+  "degree": "Bachelor of Science in Management",
+  "totalCredits": 240,
+  "gradingSystem": "KIU",
+  "semesters": [
+    {
+      "semester": 1,
+      "subjects": [
+        { "name": "Fundamentals of Entrepreneurial Business", "credits": 6, "category": "mandatory" },
+        { "name": "Economics 1 - Principles of Microeconomics", "credits": 6, "category": "mandatory" },
+        { "name": "Management Science", "credits": 6, "category": "mandatory" },
+        { "name": "Calculus for Business 1", "credits": 6, "category": "mandatory" },
+        { "name": "English Language 1", "credits": 6, "category": "language" }
+      ]
+    },
+    {
+      "semester": 2,
+      "subjects": [
+        { "name": "Principles of Project Management", "credits": 6, "category": "mandatory" },
+        { "name": "Economics 2 - Principles of Macroeconomics", "credits": 6, "category": "mandatory" },
+        { "name": "Calculus for Business 2", "credits": 6, "category": "mandatory" },
+        { "name": "Introduction to Probability and Statistics", "credits": 6, "category": "mandatory" },
+        { "name": "English Language 2", "credits": 6, "category": "language" }
+      ]
+    },
+    {
+      "semester": 3,
+      "subjects": [
+        { "name": "Financial Accounting", "credits": 6, "category": "mandatory" },
+        { "name": "Introduction to Marketing", "credits": 6, "category": "mandatory" },
+        { "name": "Human Resource Management and Leadership", "credits": 6, "category": "mandatory" },
+        { "name": "Statistics for Business and Economics", "credits": 6, "category": "mandatory" },
+        { "name": "Business English", "credits": 6, "category": "language" }
+      ]
+    },
+    {
+      "semester": 4,
+      "subjects": [
+        { "name": "Organizational Behavior", "credits": 6, "category": "mandatory" },
+        { "name": "Business Law", "credits": 6, "category": "mandatory" },
+        { "name": "Cost Accounting", "credits": 6, "category": "mandatory" },
+        { "name": "Principles of Operations Management", "credits": 6, "category": "mandatory" },
+        { "name": "Introduction to Programming and Data Analysis", "credits": 6, "category": "mandatory" }
+      ]
+    },
+    {
+      "semester": 5,
+      "subjects": [
+        { "name": "Introduction to Strategic Management", "credits": 6, "category": "mandatory" },
+        { "name": "Concentration 1", "credits": 6, "category": "mandatory" },
+        { "name": "Academic Writing and Communication Skills", "credits": 6, "category": "mandatory" },
+        { "name": "Minor / Elective Course", "credits": 6, "category": "elective" },
+        { "name": "Minor / Elective Course", "credits": 6, "category": "elective" }
+      ]
+    },
+    {
+      "semester": 6,
+      "subjects": [
+        { "name": "Research Methods", "credits": 3, "category": "mandatory" },
+        { "name": "Business Ethics", "credits": 3, "category": "mandatory" },
+        { "name": "Investment and Financial Management", "credits": 6, "category": "mandatory" },
+        { "name": "Elective Course", "credits": 6, "category": "elective" },
+        { "name": "Concentration 2", "credits": 6, "category": "mandatory" },
+        { "name": "Minor / Elective Course", "credits": 6, "category": "elective" }
+      ]
+    },
+    {
+      "semester": 7,
+      "subjects": [
+        { "name": "Internship", "credits": 6, "category": "internship" },
+        { "name": "Elective Course", "credits": 6, "category": "elective" },
+        { "name": "Elective Course", "credits": 6, "category": "elective" },
+        { "name": "Elective Course", "credits": 6, "category": "elective" },
+        { "name": "Minor / Elective Course", "credits": 6, "category": "elective" }
+      ]
+    },
+    {
+      "semester": 8,
+      "subjects": [
+        { "name": "Elective Course", "credits": 6, "category": "elective" },
+        { "name": "Concentration 3", "credits": 6, "category": "mandatory" },
+        { "name": "Elective Course", "credits": 6, "category": "elective" },
+        { "name": "Bachelor's Thesis", "credits": 12, "category": "thesis" }
+      ]
+    }
+  ]
+}
