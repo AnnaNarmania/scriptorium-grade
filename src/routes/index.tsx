@@ -332,16 +332,37 @@ function Index() {
   );
 }
 
-function StatBlock({ label, value }: { label: string; value: string }) {
+function StatBlock({
+  label,
+  value,
+  highlight = false,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
   return (
     <div className="flex flex-col gap-3">
       <span className="label-eyebrow">{label}</span>
-      <span className="numeric-display text-5xl md:text-6xl lg:text-7xl font-medium">
-        {value}
-      </span>
+      {highlight ? (
+        <span
+          className="numeric-display inline-block self-start px-3 py-1 -mx-1 text-5xl md:text-6xl lg:text-7xl font-medium"
+          style={{
+            backgroundColor: "var(--color-pink)",
+            color: "var(--color-primary-foreground)",
+          }}
+        >
+          {value}
+        </span>
+      ) : (
+        <span className="numeric-display text-5xl md:text-6xl lg:text-7xl font-medium">
+          {value}
+        </span>
+      )}
     </div>
   );
 }
+
 
 function SemesterChapter({
   index,
