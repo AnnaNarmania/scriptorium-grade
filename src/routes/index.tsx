@@ -295,6 +295,7 @@ function Index() {
               key={semester.id}
               index={i + 1}
               semester={semester}
+              accent={CHAPTER_ACCENTS[i % CHAPTER_ACCENTS.length]}
               onRename={(n) => renameSemester(semester.id, n)}
               onRemove={() => removeSemester(semester.id)}
               onAddSubject={() => addSubject(semester.id)}
@@ -304,6 +305,7 @@ function Index() {
               onRemoveSubject={(sid) => removeSubject(semester.id, sid)}
             />
           ))}
+
 
           <div className="rule-thick" />
 
