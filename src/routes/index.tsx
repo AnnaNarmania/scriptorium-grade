@@ -274,7 +274,7 @@ function Index() {
           aria-label="Summary"
           className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 py-10 md:py-14"
         >
-          <StatBlock label="Current GPA" value={stats.gpa.toFixed(2)} />
+          <StatBlock label="Current GPA" value={stats.gpa.toFixed(2)} highlight />
           <StatBlock label="Completed Credits" value={String(stats.credits)} />
           <StatBlock
             label="Average Grade"
