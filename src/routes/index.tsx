@@ -323,11 +323,13 @@ function Index() {
             <p className="label-eyebrow">End of Record</p>
             <button
               onClick={addSemester}
-              className="group inline-flex items-center gap-3 text-sm font-medium text-primary hover:opacity-80 transition-opacity"
+              className="inline-flex items-center gap-2 label-eyebrow px-4 py-2.5 rounded-[4px] border border-foreground transition-colors hover:bg-foreground hover:text-background"
+              style={{ backgroundColor: "var(--color-pink)", color: "var(--color-foreground)" }}
             >
-              <span className="inline-block h-px w-8 bg-current" />
+              <span aria-hidden>+</span>
               Add Semester
             </button>
+
           </div>
         </main>
 
