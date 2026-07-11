@@ -382,7 +382,7 @@ export function ArchiveCardDialog({
     return toPng(node, {
       pixelRatio: 3,
       cacheBust: true,
-      backgroundColor: "#FFF9F0",
+      backgroundColor: "#FFF9E9",
     });
   };
 
@@ -398,7 +398,7 @@ export function ArchiveCardDialog({
           pixelRatio: 3,
           cacheBust: true,
           quality: 0.95,
-          backgroundColor: "#FFF9F0",
+          backgroundColor: "#FFF9E9",
         });
         downloadDataUrl(dataUrl, "scriptorium-archive-card.jpg");
       } else if (kind === "png") {

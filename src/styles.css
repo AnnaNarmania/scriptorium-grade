@@ -46,12 +46,12 @@
   /* Native controls (select popups, scrollbars) follow the page theme */
   color-scheme: light;
   --radius: 0.4rem;
-  /* Warm paper */
-  --background: oklch(0.985 0.014 90);   /* #FFF9F0 */
+  /* Warm cream paper */
+  --background: oklch(0.982 0.022 90);   /* #FFF9E9 */
   --foreground: oklch(0.22 0 0);         /* ink #171717 */
-  --card: oklch(0.985 0.014 90);
+  --card: oklch(0.982 0.022 90);
   --card-foreground: oklch(0.22 0 0);
-  --popover: oklch(0.99 0.01 90);
+  --popover: oklch(0.988 0.016 90);
   --popover-foreground: oklch(0.22 0 0);
 
   /* Hot pink primary */
@@ -156,7 +156,7 @@
    their --color-* mappings are pinned so every reference pattern resolves. */
 .archive-card {
   color-scheme: light;
-  --background: oklch(0.985 0.014 90);
+  --background: oklch(0.982 0.022 90);
   --foreground: oklch(0.22 0 0);
   --muted-foreground: oklch(0.52 0.014 75);
   --border: oklch(0.87 0.012 85);
@@ -168,7 +168,7 @@
   --mint: oklch(0.86 0.11 168);
   --coral: oklch(0.72 0.18 35);
   --lavender: oklch(0.76 0.11 295);
-  --color-background: oklch(0.985 0.014 90);
+  --color-background: oklch(0.982 0.022 90);
   --color-foreground: oklch(0.22 0 0);
   --color-muted-foreground: oklch(0.52 0.014 75);
   --color-border: oklch(0.87 0.012 85);
