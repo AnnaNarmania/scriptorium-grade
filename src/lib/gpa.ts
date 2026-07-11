@@ -71,18 +71,14 @@ export type GpaStats = {
   gpa: number; // Σ(GP × credits) / Σ(credits), passed subjects only
   weightedPoints: number;
   credits: number; // completed (passed) credits only
-  avgPercent: number; // credit-weighted average grade across all graded subjects
   passed: number;
   failed: number;
-  graded: number;
   courses: number;
 };
 
 export function computeStats(subjects: Subject[]): GpaStats {
   let weightedPoints = 0;
   let credits = 0;
-  let percentSum = 0;
-  let percentCredits = 0;
   let passed = 0;
   let failed = 0;
   let courses = 0;
@@ -92,9 +88,6 @@ export function computeStats(subjects: Subject[]): GpaStats {
     if (subject.grade === "" || subject.grade == null) continue;
     const grade = Number(subject.grade);
     const cr = Number(subject.credits) || 0;
-
-    percentSum += grade * cr;
-    percentCredits += cr;
 
     const gp = gradePoint(grade);
     if (gp === null) {
@@ -111,10 +104,8 @@ export function computeStats(subjects: Subject[]): GpaStats {
     gpa: credits ? weightedPoints / credits : 0,
     weightedPoints,
     credits,
-    avgPercent: percentCredits ? percentSum / percentCredits : 0,
     passed,
     failed,
-    graded: passed + failed,
     courses,
   };
 }

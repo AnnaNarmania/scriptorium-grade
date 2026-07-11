@@ -1,6 +1,6 @@
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -43,6 +43,8 @@
 }
 
 :root {
+  /* Native controls (select popups, scrollbars) follow the page theme */
+  color-scheme: light;
   --radius: 0.4rem;
   /* Warm paper */
   --background: oklch(0.985 0.014 90);   /* #FFF9F0 */
@@ -82,6 +84,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.16 0 0);         /* #141414 */
   --foreground: oklch(0.96 0.012 85);    /* #F8F5EE */
   --card: oklch(0.16 0 0);
@@ -140,44 +143,43 @@
     color: var(--color-primary-foreground);
   }
 
-  /* Paper fibers — anisotropic noise stretched horizontally, like the
-     strands in uncoated stock. Quieter than the grain layer.
-     Both noise layers force the alpha channel opaque (feFuncA intercept=1)
-     so the opacity values below control the real strength — raw turbulence
-     has a noisy alpha that would otherwise halve it. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 80;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.16' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-    background-size: 600px 600px;
-    opacity: 0.05;
-    mix-blend-mode: multiply;
+  /* Native select popups can't be fully styled; pin readable colors so
+     options never render light-on-light or dark-on-dark. */
+  select option {
+    background-color: var(--color-popover);
+    color: var(--color-popover-foreground);
   }
-  .dark body::before {
-    opacity: 0.07;
-    mix-blend-mode: screen;
-  }
+}
 
-  /* Paper grain — fine photocopy noise over everything.
-     Multiply darkens on paper; screen lifts on ink-black dark mode. */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 80;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 240px 240px;
-    opacity: 0.07;
-    mix-blend-mode: multiply;
-  }
-  .dark body::after {
-    opacity: 0.1;
-    mix-blend-mode: screen;
-  }
+/* The exportable archive card is a printed artifact: it keeps the light
+   paper palette even when the site is in dark mode. Both the base vars and
+   their --color-* mappings are pinned so every reference pattern resolves. */
+.archive-card {
+  color-scheme: light;
+  --background: oklch(0.985 0.014 90);
+  --foreground: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.52 0.014 75);
+  --border: oklch(0.87 0.012 85);
+  --rule: oklch(0.22 0 0);
+  --primary-foreground: oklch(0.22 0 0);
+  --pink: oklch(0.68 0.23 0);
+  --blue: oklch(0.55 0.24 268);
+  --yellow: oklch(0.88 0.16 92);
+  --mint: oklch(0.86 0.11 168);
+  --coral: oklch(0.72 0.18 35);
+  --lavender: oklch(0.76 0.11 295);
+  --color-background: oklch(0.985 0.014 90);
+  --color-foreground: oklch(0.22 0 0);
+  --color-muted-foreground: oklch(0.52 0.014 75);
+  --color-border: oklch(0.87 0.012 85);
+  --color-rule: oklch(0.22 0 0);
+  --color-primary-foreground: oklch(0.22 0 0);
+  --color-pink: oklch(0.68 0.23 0);
+  --color-blue: oklch(0.55 0.24 268);
+  --color-yellow: oklch(0.88 0.16 92);
+  --color-mint: oklch(0.86 0.11 168);
+  --color-coral: oklch(0.72 0.18 35);
+  --color-lavender: oklch(0.76 0.11 295);
 }
 
 @utility label-eyebrow {
@@ -230,6 +232,7 @@
 @utility halftone {
   background-image: radial-gradient(circle, currentColor 1.1px, transparent 1.6px);
   background-size: 8px 8px;
+  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 72%);
   mask-image: radial-gradient(circle, black 30%, transparent 72%);
 }
 

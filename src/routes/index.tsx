@@ -17,6 +17,7 @@ import {
   getCurriculum,
   numberWord,
 } from "@/lib/curriculum";
+import { ArchiveCardDialog } from "@/components/archive-card";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -137,6 +138,7 @@ function Index() {
   const [dark, setDark] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
+  const [exportOpen, setExportOpen] = useState(false);
 
   // dark mode
   useEffect(() => {
@@ -224,11 +226,6 @@ function Index() {
   const removeSemester = (semesterId: string) =>
     setSemesters((prev) => prev.filter((s) => s.id !== semesterId));
 
-  const renameSemester = (semesterId: string, name: string) =>
-    setSemesters((prev) =>
-      prev.map((s) => (s.id === semesterId ? { ...s, name } : s)),
-    );
-
   // Swap the whole record for the selected faculty's curriculum template.
   // Grades already entered are the only thing worth guarding.
   const selectCurriculum = (id: string) => {
@@ -249,8 +246,9 @@ function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto w-full max-w-[1200px] px-6 md:px-12 lg:px-16 py-10 md:py-16">
+    <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
+      <StarScatter />
+      <div className="relative mx-auto w-full max-w-[1200px] px-6 md:px-12 lg:px-16 py-10 md:py-16">
         {/* MASTHEAD */}
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 label-mono text-muted-foreground">
           <span className="flex items-center gap-1.5 text-foreground">
@@ -271,11 +269,6 @@ function Index() {
         <header className="mt-10 md:mt-14 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-8 md:gap-12">
           <div className="relative min-w-0">
             {/* faint print ornaments behind the cover */}
-            <span
-              aria-hidden
-              className="halftone pointer-events-none absolute -top-8 right-24 hidden h-44 w-44 rounded-full md:block"
-              style={{ color: "var(--color-pink)", opacity: 0.4 }}
-            />
             <Star
               className="pointer-events-none absolute -top-4 right-4 hidden -rotate-12 text-8xl md:block"
               style={{ color: "var(--color-blue)", opacity: 0.07 }}
@@ -287,11 +280,23 @@ function Index() {
               +
             </span>
             <div className="mb-4 md:mb-6 flex flex-wrap items-center gap-2">
-              <span className="sticker -rotate-1" style={{ backgroundColor: "var(--color-yellow)" }}>
+              <span
+                className="sticker -rotate-1"
+                style={{
+                  backgroundColor: "var(--color-pink)",
+                  color: "var(--color-primary-foreground)",
+                }}
+              >
                 Issue N°01
               </span>
               <span className="sticker">2026 Edition</span>
-              <span className="sticker rotate-1" style={{ backgroundColor: "var(--color-mint)" }}>
+              <span
+                className="sticker rotate-1"
+                style={{
+                  backgroundColor: "var(--color-lavender)",
+                  color: "var(--color-primary-foreground)",
+                }}
+              >
                 Academic Archive
               </span>
             </div>
@@ -354,6 +359,16 @@ function Index() {
               {dark ? "Light" : "Dark"} Mode
             </button>
 
+            <button
+              onClick={() => setExportOpen(true)}
+              className="label-eyebrow inline-flex h-8 items-center gap-2 border border-input px-3 rounded-[6px] hover:bg-muted transition-colors"
+            >
+              Export Card
+              <span aria-hidden style={{ color: "var(--color-pink)" }}>
+                ★
+              </span>
+            </button>
+
             <label className="flex flex-col items-end gap-1">
               <span className="label-eyebrow">Faculty Curriculum</span>
               <select
@@ -390,7 +405,7 @@ function Index() {
               [ System 01 ]
             </span>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8">
+          <div className="grid grid-cols-2 gap-y-10 gap-x-8">
             <StatBlock
               label="Overall GPA"
               value={stats.passed ? formatGpa(stats.gpa) : "—"}
@@ -406,11 +421,6 @@ function Index() {
                   ? `of ${activeCurriculum.totalCredits} ECTS`
                   : undefined
               }
-            />
-            <StatBlock
-              label="Average Grade"
-              value={stats.graded ? stats.avgPercent.toFixed(1) : "—"}
-              sub="Percent, credit-weighted"
             />
           </div>
         </section>
@@ -429,7 +439,6 @@ function Index() {
               index={i + 1}
               semester={semester}
               accent={CHAPTER_ACCENTS[i % CHAPTER_ACCENTS.length]}
-              onRename={(n) => renameSemester(semester.id, n)}
               onRemove={() => removeSemester(semester.id)}
               onAddSubject={() => addSubject(semester.id)}
               onUpdateSubject={(sid, patch) =>
@@ -457,18 +466,22 @@ function Index() {
           </div>
         </main>
 
-        {/* COLOPHON */}
-        <footer className="rule-hair mt-6 pt-6 flex flex-wrap items-end justify-between gap-6 text-xs text-muted-foreground">
-          <div className="flex flex-col gap-3">
+        {/* COLOPHON — a fixed two-column composition, like a printed
+            magazine colophon: the columns compress on small screens but
+            never stack. */}
+        <footer className="rule-hair mt-6 grid grid-cols-[minmax(0,9fr)_minmax(0,11fr)] items-start gap-6 pt-6 text-xs text-muted-foreground md:grid-cols-[minmax(0,7fr)_minmax(0,13fr)]">
+          <div className="flex min-w-0 flex-col gap-3">
             <p className="label-eyebrow text-foreground">Colophon</p>
-            <span aria-hidden className="barcode h-6 w-32 text-foreground" />
+            <span
+              aria-hidden
+              className="barcode h-6 w-32 max-w-full text-foreground"
+            />
             <p className="label-mono">
               No. 0026-07 · Scanned{" "}
-              {lastSaved ? format(lastSaved, "dd.MM.yy") : "—"} · Printed in
-              this browser
+              {lastSaved ? format(lastSaved, "dd.MM.yy") : "—"} · Edition 01
             </p>
           </div>
-          <div className="flex max-w-md flex-col gap-2 text-right">
+          <div className="flex min-w-0 max-w-md flex-col gap-2 justify-self-end text-right">
             <p className="font-medium text-foreground">
               Designed and developed by ann.{" "}
               <span
@@ -487,6 +500,99 @@ function Index() {
           </div>
         </footer>
       </div>
+
+      <ArchiveCardDialog
+        open={exportOpen}
+        onOpenChange={setExportOpen}
+        semesters={semesters}
+        curriculum={activeCurriculum}
+      />
+    </div>
+  );
+}
+
+// Print scatter — star flourishes stamped across the whole sheet, zine-style.
+// Hand-placed rather than randomized so the page "prints" identically on
+// every visit; percentage tops stretch the field over however many
+// semesters the record grows to.
+const SCATTERED_STARS: Array<{
+  top: string;
+  left: string;
+  glyph: string;
+  size: string;
+  rotate: number;
+  color: string;
+  opacity: number;
+}> = [
+  { top: "1%", left: "55%", glyph: "✧", size: "text-base", rotate: 10, color: "--color-lavender", opacity: 0.4 },
+  { top: "2%", left: "6%", glyph: "✶", size: "text-2xl", rotate: -12, color: "--color-pink", opacity: 0.5 },
+  { top: "4%", left: "88%", glyph: "⋆", size: "text-4xl", rotate: 8, color: "--color-blue", opacity: 0.35 },
+  { top: "5%", left: "26%", glyph: "⋆", size: "text-xs", rotate: 0, color: "--color-mint", opacity: 0.5 },
+  { top: "7%", left: "46%", glyph: "✳", size: "text-sm", rotate: 0, color: "--color-coral", opacity: 0.45 },
+  { top: "8%", left: "96%", glyph: "✶", size: "text-base", rotate: -10, color: "--color-yellow", opacity: 0.5 },
+  { top: "10%", left: "3%", glyph: "★", size: "text-6xl", rotate: -18, color: "--color-yellow", opacity: 0.3 },
+  { top: "13%", left: "93%", glyph: "✦", size: "text-xl", rotate: 15, color: "--color-pink", opacity: 0.45 },
+  { top: "15%", left: "7%", glyph: "✳", size: "text-xl", rotate: 12, color: "--color-coral", opacity: 0.35 },
+  { top: "17%", left: "12%", glyph: "⋆", size: "text-base", rotate: -6, color: "--color-blue", opacity: 0.5 },
+  { top: "19%", left: "95%", glyph: "⋆", size: "text-sm", rotate: -8, color: "--color-pink", opacity: 0.5 },
+  { top: "21%", left: "82%", glyph: "✶", size: "text-5xl", rotate: 20, color: "--color-mint", opacity: 0.3 },
+  { top: "23%", left: "2%", glyph: "✦", size: "text-base", rotate: 14, color: "--color-mint", opacity: 0.45 },
+  { top: "24%", left: "41%", glyph: "✦", size: "text-xs", rotate: 0, color: "--color-foreground", opacity: 0.25 },
+  { top: "26%", left: "70%", glyph: "✧", size: "text-sm", rotate: 0, color: "--color-yellow", opacity: 0.5 },
+  { top: "28%", left: "5%", glyph: "✷", size: "text-3xl", rotate: -14, color: "--color-lavender", opacity: 0.4 },
+  { top: "30%", left: "88%", glyph: "✶", size: "text-xs", rotate: 8, color: "--color-blue", opacity: 0.5 },
+  { top: "32%", left: "90%", glyph: "★", size: "text-2xl", rotate: 10, color: "--color-coral", opacity: 0.35 },
+  { top: "34%", left: "10%", glyph: "⋆", size: "text-2xl", rotate: -16, color: "--color-yellow", opacity: 0.35 },
+  { top: "36%", left: "66%", glyph: "⋆", size: "text-sm", rotate: 0, color: "--color-pink", opacity: 0.5 },
+  { top: "39%", left: "52%", glyph: "✳", size: "text-xs", rotate: 0, color: "--color-foreground", opacity: 0.2 },
+  { top: "41%", left: "2%", glyph: "✦", size: "text-7xl", rotate: 12, color: "--color-pink", opacity: 0.12 },
+  { top: "43%", left: "8%", glyph: "✧", size: "text-sm", rotate: 10, color: "--color-coral", opacity: 0.45 },
+  { top: "45%", left: "86%", glyph: "✳", size: "text-base", rotate: -8, color: "--color-blue", opacity: 0.45 },
+  { top: "47%", left: "92%", glyph: "✶", size: "text-xl", rotate: -14, color: "--color-lavender", opacity: 0.35 },
+  { top: "49%", left: "30%", glyph: "✶", size: "text-xs", rotate: 0, color: "--color-mint", opacity: 0.5 },
+  { top: "51%", left: "5%", glyph: "⋆", size: "text-base", rotate: 6, color: "--color-pink", opacity: 0.45 },
+  { top: "53%", left: "94%", glyph: "⋆", size: "text-3xl", rotate: 18, color: "--color-yellow", opacity: 0.45 },
+  { top: "57%", left: "8%", glyph: "★", size: "text-xl", rotate: -10, color: "--color-blue", opacity: 0.3 },
+  { top: "59%", left: "90%", glyph: "✷", size: "text-sm", rotate: 12, color: "--color-mint", opacity: 0.5 },
+  { top: "62%", left: "74%", glyph: "✷", size: "text-6xl", rotate: -16, color: "--color-lavender", opacity: 0.16 },
+  { top: "64%", left: "12%", glyph: "✦", size: "text-xs", rotate: 0, color: "--color-pink", opacity: 0.5 },
+  { top: "66%", left: "4%", glyph: "✶", size: "text-sm", rotate: 6, color: "--color-coral", opacity: 0.5 },
+  { top: "68%", left: "55%", glyph: "⋆", size: "text-sm", rotate: -6, color: "--color-yellow", opacity: 0.45 },
+  { top: "70%", left: "89%", glyph: "✦", size: "text-2xl", rotate: -12, color: "--color-pink", opacity: 0.4 },
+  { top: "72%", left: "3%", glyph: "✶", size: "text-2xl", rotate: 16, color: "--color-blue", opacity: 0.25 },
+  { top: "75%", left: "18%", glyph: "⋆", size: "text-4xl", rotate: 14, color: "--color-mint", opacity: 0.3 },
+  { top: "77%", left: "93%", glyph: "✧", size: "text-base", rotate: -10, color: "--color-coral", opacity: 0.45 },
+  { top: "79%", left: "60%", glyph: "✳", size: "text-xs", rotate: 0, color: "--color-foreground", opacity: 0.25 },
+  { top: "81%", left: "8%", glyph: "✳", size: "text-sm", rotate: 8, color: "--color-mint", opacity: 0.5 },
+  { top: "83%", left: "92%", glyph: "★", size: "text-5xl", rotate: -20, color: "--color-blue", opacity: 0.15 },
+  { top: "85%", left: "52%", glyph: "⋆", size: "text-xs", rotate: 0, color: "--color-foreground", opacity: 0.22 },
+  { top: "87%", left: "7%", glyph: "✦", size: "text-base", rotate: 10, color: "--color-yellow", opacity: 0.55 },
+  { top: "89%", left: "91%", glyph: "✶", size: "text-base", rotate: -12, color: "--color-lavender", opacity: 0.45 },
+  { top: "91%", left: "45%", glyph: "✶", size: "text-3xl", rotate: -8, color: "--color-pink", opacity: 0.35 },
+  { top: "93%", left: "27%", glyph: "✧", size: "text-sm", rotate: 10, color: "--color-blue", opacity: 0.4 },
+  { top: "95%", left: "84%", glyph: "⋆", size: "text-xl", rotate: 16, color: "--color-coral", opacity: 0.45 },
+  { top: "97%", left: "60%", glyph: "✦", size: "text-xs", rotate: 0, color: "--color-coral", opacity: 0.4 },
+  { top: "98%", left: "15%", glyph: "✳", size: "text-2xl", rotate: -14, color: "--color-lavender", opacity: 0.4 },
+];
+
+function StarScatter() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
+      {SCATTERED_STARS.map((s, i) => (
+        <span
+          key={i}
+          className={`absolute leading-none ${s.size}`}
+          style={{
+            top: s.top,
+            left: s.left,
+            transform: `rotate(${s.rotate}deg)`,
+            color: `var(${s.color})`,
+            opacity: s.opacity,
+          }}
+        >
+          {s.glyph}
+        </span>
+      ))}
     </div>
   );
 }
@@ -567,7 +673,6 @@ function SemesterChapter({
   index,
   semester,
   accent,
-  onRename,
   onRemove,
   onAddSubject,
   onUpdateSubject,
@@ -576,7 +681,6 @@ function SemesterChapter({
   index: number;
   semester: Semester;
   accent: string;
-  onRename: (n: string) => void;
   onRemove: () => void;
   onAddSubject: () => void;
   onUpdateSubject: (id: string, patch: Partial<Subject>) => void;
@@ -627,12 +731,9 @@ function SemesterChapter({
           </p>
 
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
-            <input
-              value={semester.name}
-              onChange={(e) => onRename(e.target.value)}
-              aria-label="Semester name"
-              className="min-w-0 bg-transparent border-0 border-b border-transparent hover:border-input focus:border-foreground focus:outline-none font-display text-3xl md:text-4xl font-medium tracking-tight py-1"
-            />
+            <h2 className="min-w-0 font-display text-3xl md:text-4xl font-medium tracking-tight py-1">
+              {semester.name}
+            </h2>
             <button
               onClick={onRemove}
               className="label-eyebrow text-muted-foreground hover:text-destructive transition-colors shrink-0"
@@ -794,7 +895,7 @@ function SubjectRow({
           className="min-w-0 flex-1 bg-transparent border-0 focus:outline-none text-[0.95rem] placeholder:text-muted-foreground/60 py-1"
         />
         {subject.category && subject.category !== "mandatory" ? (
-          <span className="label-mono hidden shrink-0 text-muted-foreground/70 md:inline">
+          <span className="label-mono shrink-0 text-muted-foreground/70">
             [{subject.category}]
           </span>
         ) : null}
