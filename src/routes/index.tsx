@@ -492,6 +492,32 @@ function Index() {
                 ⋆
               </span>
             </p>
+            <p className="label-mono flex flex-wrap justify-end gap-x-5 gap-y-1">
+              <span>
+                Source ·{" "}
+                <a
+                  href="https://github.com/AnnaNarmania"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Source code on GitHub (opens in a new tab)"
+                  className="text-foreground underline-offset-2 transition-colors hover:underline"
+                >
+                  GitHub <span aria-hidden>↗</span>
+                </a>
+              </span>
+              <span>
+                Profile ·{" "}
+                <a
+                  href="https://www.linkedin.com/in/ananarmania/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Profile on LinkedIn (opens in a new tab)"
+                  className="text-foreground underline-offset-2 transition-colors hover:underline"
+                >
+                  LinkedIn <span aria-hidden>↗</span>
+                </a>
+              </span>
+            </p>
             <p className="leading-relaxed">
               A digital academic archive for tracking university progress.
               Curriculums are editable, credits are weighted, and GPA
