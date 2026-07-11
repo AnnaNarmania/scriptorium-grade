@@ -492,8 +492,25 @@ function Index() {
                 ⋆
               </span>
             </p>
-            <p className="label-mono flex flex-wrap justify-end gap-x-5 gap-y-1">
-              <span>
+            {/* paper note taped to the colophon — the designer's own annotation */}
+            <p
+              className="relative mt-2 inline-block -rotate-1 self-end border border-rule/60 bg-secondary px-3.5 py-2.5 pt-3 text-left"
+              style={{
+                boxShadow:
+                  "2px 3px 0 0 color-mix(in oklab, var(--color-rule) 22%, transparent)",
+              }}
+            >
+              <span
+                aria-hidden
+                className="absolute -top-2 left-1/2 h-4 w-14 -translate-x-1/2 -rotate-3 select-none"
+                style={{
+                  backgroundColor:
+                    "color-mix(in oklab, var(--color-pink) 28%, transparent)",
+                  border:
+                    "1px solid color-mix(in oklab, var(--color-pink) 38%, transparent)",
+                }}
+              />
+              <span className="label-mono block">
                 Source ·{" "}
                 <a
                   href="https://github.com/AnnaNarmania"
@@ -505,7 +522,7 @@ function Index() {
                   GitHub <span aria-hidden>↗</span>
                 </a>
               </span>
-              <span>
+              <span className="label-mono mt-1 block">
                 Profile ·{" "}
                 <a
                   href="https://www.linkedin.com/in/ananarmania/"
