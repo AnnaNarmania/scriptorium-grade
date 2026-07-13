@@ -513,7 +513,7 @@ function Index() {
               <span className="label-mono block">
                 Source ·{" "}
                 <a
-                  href="https://github.com/AnnaNarmania"
+                  href="https://github.com/AnnaNarmania/scriptorium-grade"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Source code on GitHub (opens in a new tab)"
